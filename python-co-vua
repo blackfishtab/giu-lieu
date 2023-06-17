@@ -1,0 +1,61 @@
+//tất cả mọi thứ:
+//python
+# Chess Game
+
+# Initialize the chessboard
+board = [["R", "N", "B", "Q", "K", "B", "N", "R"],
+         ["P", "P", "P", "P", "P", "P", "P", "P"],
+         [" ", " ", " ", " ", " ", " ", " ", " "],
+         [" ", " ", " ", " ", " ", " ", " ", " "],
+         [" ", " ", " ", " ", " ", " ", " ", " "],
+         [" ", " ", " ", " ", " ", " ", " ", " "],
+         ["p", "p", "p", "p", "p", "p", "p", "p"],
+         ["r", "n", "b", "q", "k", "b", "n", "r"]]
+
+# Function to print the chessboard
+def print_board(board):
+    for row in board:
+        print(" ".join(row))
+
+# Function to check if the move is valid
+def is_valid_move(board, start_pos, end_pos):
+    start_row, start_col = start_pos
+    end_row, end_col = end_pos
+
+    # Check if the start position is valid
+    if start_row < 0 or start_row > 7 or start_col < 0 or start_col > 7:
+        return False
+
+    # Check if the end position is valid
+    if end_row < 0 or end_row > 7 or end_col < 0 or end_col > 7:
+        return False
+
+    # Check if the piece at the start position is not empty
+    if board[start_row][start_col] == " ":
+        return False
+
+    # Add more specific rules for piece movements
+
+    return True
+
+# Main game loop
+while True:
+    # Print the current board
+    print_board(board)
+
+    # Get input from the player
+    start_pos = input("Enter the start position (row, column): ")
+    end_pos = input("Enter the end position (row, column): ")
+
+    # Convert input to integer coordinates
+    start_row, start_col = map(int, start_pos.split(","))
+    end_row, end_col = map(int, end_pos.split(","))
+
+    # Check if the move is valid
+    if is_valid_move(board, (start_row, start_col), (end_row, end_col)):
+        # Make the move
+        board[end_row][end_col] = board[start_row][start_col]
+        board[start_row][start_col] = " "
+    else:
+        print("Invalid move! Try again.")
+
